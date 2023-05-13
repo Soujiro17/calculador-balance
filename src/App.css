@@ -43,6 +43,7 @@
   width: 100%;
   border: 1px solid #000;
   gap: 2%;
+  height: 100%;
 }
 
 .left-grid,

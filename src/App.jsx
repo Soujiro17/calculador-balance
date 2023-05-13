@@ -294,6 +294,11 @@ function App() {
 
   const pushMovimiento = (value) => setMovimientos((prev) => [...prev, value]);
 
+  const clearLocalStorage = () => {
+    localStorage.removeItem("costoVenta");
+    localStorage.removeItem("movimientos");
+  };
+
   const deleteMovimiento = (valueId) => {
     setMovimientos((prev) => prev.filter((value) => value.id !== valueId));
   };
@@ -307,6 +312,7 @@ function App() {
           costoVenta={costoVenta}
           handleCostoVenta={handleCostoVenta}
         />
+        <button onClick={clearLocalStorage}>Limpiar localstorage</button>
         <AddMovimiento pushMovimiento={pushMovimiento} />
         <Movimientos
           movimientos={movimientos}
