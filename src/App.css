@@ -1,0 +1,144 @@
+.container {
+  min-height: 100vh;
+  padding: 5%;
+  background-color: rgba(0, 0, 0, 0.03);
+  display: flex;
+  gap: 30px;
+}
+
+.configuraciones {
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  background-color: white;
+}
+
+.left-container {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+.form-group label {
+  display: block;
+  margin-right: 10px;
+  max-width: 150px;
+  width: 150px;
+}
+
+.form-group input {
+  width: 150px;
+}
+
+.tabla-grid {
+  display: flex;
+  width: 100%;
+  border: 1px solid #000;
+  gap: 2%;
+}
+
+.left-grid,
+.right-grid {
+  width: 49%;
+  padding: 15px;
+  background-color: rgba(185, 185, 185, 0.333);
+  position: relative;
+  padding-bottom: 120px;
+}
+
+.left-grid section:last-of-type,
+.right-grid section:last-of-type {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.balance-section {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px dashed #000;
+}
+
+.balance-section h4 {
+  margin-bottom: 10px;
+}
+
+.total-pos {
+  width: 100%;
+  background-color: rgb(41, 196, 62);
+}
+
+.total-pos,
+.total-neg {
+  color: #fff;
+  padding: 5px;
+}
+
+.total-neg {
+  background-color: rgb(196, 41, 41);
+}
+
+.activos {
+  grid-area: activos;
+}
+
+.pasivos {
+  grid-area: pasivos;
+}
+
+.inventario {
+  grid-area: inventario;
+}
+
+.patrimonio {
+  grid-area: patrimonio;
+}
+
+.fiados {
+  grid-area: fiados;
+}
+
+.utilidad {
+  grid-area: utilidad;
+}
+
+.add-movement {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table th,
+td {
+  border: 1px solid #000;
+}
+
+.tabla-resumen-row {
+  display: flex;
+  margin-left: 10px;
+  gap: 10px;
+}
+
+.signo {
+  width: 5px;
+}
+
+.valor {
+  text-align: left;
+  width: 70px;
+}
