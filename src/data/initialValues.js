@@ -5,4 +5,5 @@ export const movInitialValue = {
   valor: "",
   desc: "",
   movType: "",
+  fecha: "",
 };

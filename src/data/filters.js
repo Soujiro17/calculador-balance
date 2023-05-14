@@ -11,13 +11,13 @@ export function patrimonioFilters(m) {
 export function utilidadesPerdidasFilter(m) {
   const { movType: mT } = m;
 
-  return mT == 1 || mT == 2 || mT == 4 || mT == 5;
+  return mT == 1 || mT == 2 || mT == 4 || mT == 5 || mT == 8;
 }
 
 export function activosFijosFilter(m) {
   const { movType: mT } = m;
 
-  return mT == 0;
+  return mT == 0 || mT == 8;
 }
 
 export function inventarioFilter(m) {

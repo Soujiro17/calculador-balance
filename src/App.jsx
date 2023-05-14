@@ -33,34 +33,45 @@ function FormGroup({ label, id, sufix, ...props }) {
   );
 }
 
-function Configuraciones({ costoVenta, handleCostoVenta }) {
+function Configuraciones({
+  costoVenta,
+  handleCostoVenta,
+  handleDesgasteUtilidad,
+  desgasteUtilidad,
+}) {
   return (
     <div className="configuraciones bs br-s">
-      <div className="form-group">
-        <FormGroup
-          id="costo-venta"
-          label="Costo por venta"
-          min="0"
-          max="100"
-          type="number"
-          placeholder="Costo por venta"
-          value={costoVenta}
-          onChange={handleCostoVenta}
-          sufix="%"
-        />
-      </div>
-      <div className="form-group">
-        <FormGroup
-          id="ganancia-venta"
-          label="Ganancia por venta"
-          min="0"
-          max="100"
-          disabled
-          type="number"
-          value={100 - costoVenta}
-          sufix="%"
-        />
-      </div>
+      <FormGroup
+        id="costo-venta"
+        label="Costo por venta"
+        min="0"
+        max="100"
+        type="number"
+        placeholder="Costo por venta"
+        value={costoVenta}
+        onChange={handleCostoVenta}
+        sufix="%"
+      />
+      <FormGroup
+        id="ganancia-venta"
+        label="Ganancia por venta"
+        min="0"
+        max="100"
+        disabled
+        type="number"
+        value={100 - costoVenta}
+        sufix="%"
+      />
+      <FormGroup
+        id="desgaste-utilidad"
+        label="Desgaste por utilidad"
+        min="0"
+        max="100"
+        type="number"
+        onChange={handleDesgasteUtilidad}
+        value={desgasteUtilidad}
+        sufix="%"
+      />
     </div>
   );
 }
@@ -130,6 +141,15 @@ function AddMovimiento({ pushMovimiento }) {
           onChange={handleValues}
           required
         />
+        <FormGroup
+          id="fecha"
+          label="Fecha"
+          type="text"
+          placeholder="Fecha"
+          value={values.fecha}
+          name="fecha"
+          onChange={handleValues}
+        />
         <input type="submit" />
       </form>
     </div>
@@ -139,11 +159,10 @@ function AddMovimiento({ pushMovimiento }) {
 function Movimientos({ movimientos = [], deleteMovimiento }) {
   return (
     <div className="movimientos bs pd br-s">
-      {/* <h2>Movimientos</h2> */}
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Fecha</th>
             <th>Tipo</th>
             <th>Valor</th>
             <th>Descripción</th>
@@ -153,7 +172,7 @@ function Movimientos({ movimientos = [], deleteMovimiento }) {
         <tbody>
           {movimientos.map((movimiento) => (
             <tr key={movimiento.id}>
-              <td>{movimiento.id}</td>
+              <td>{movimiento.fecha}</td>
               <td>{movimiento.movType}</td>
               <td>{movimiento.valor.toLocaleString("es-CL")}</td>
               <td>{movimiento.desc}</td>
@@ -170,7 +189,7 @@ function Movimientos({ movimientos = [], deleteMovimiento }) {
   );
 }
 
-function Tablon({ movimientos = [], costoVenta }) {
+function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
   const activosCirculantes = movimientos.filter(activosFilters);
   const activosFijos = movimientos.filter(activosFijosFilter);
   const inventario = movimientos.filter(inventarioFilter);
@@ -188,7 +207,7 @@ function Tablon({ movimientos = [], costoVenta }) {
     totalUtilidades = 0;
 
   const activosCirculantesMapeado = activosCirculantes.map((m) => {
-    const { valor, component } = activosCirculantesMap(m);
+    const { valor, component } = activosCirculantesMap(m, desgasteUtilidad);
 
     totalActivosCirculantes += valor;
 
@@ -196,7 +215,7 @@ function Tablon({ movimientos = [], costoVenta }) {
   });
 
   const activosFijosMapeado = activosFijos.map((m) => {
-    const { valor, component } = activosFijosMap(m, costoVenta);
+    const { valor, component } = activosFijosMap(m);
 
     totalActivosFijos += valor;
 
@@ -212,7 +231,7 @@ function Tablon({ movimientos = [], costoVenta }) {
   });
 
   const utilidadesMapeado = utilidades.map((m) => {
-    const { valor, component } = utilidadesMap(m, costoVenta);
+    const { valor, component } = utilidadesMap(m, costoVenta, desgasteUtilidad);
 
     totalUtilidades += valor;
 
@@ -290,6 +309,10 @@ function Tablon({ movimientos = [], costoVenta }) {
 
 function App() {
   const [costoVenta, setCostoVenta] = useLocalStorage("costoVenta", 90);
+  const [desgasteUtilidad, setDesgasteUtilidad] = useLocalStorage(
+    "desgasteUtilidad",
+    0
+  );
   const [movimientos, setMovimientos] = useLocalStorage("movimientos", []);
 
   const pushMovimiento = (value) => setMovimientos((prev) => [...prev, value]);
@@ -303,6 +326,7 @@ function App() {
     setMovimientos((prev) => prev.filter((value) => value.id !== valueId));
   };
 
+  const handleDesgasteUtilidad = (e) => setDesgasteUtilidad(e.target.value);
   const handleCostoVenta = (e) => setCostoVenta(e.target.value);
 
   return (
@@ -311,6 +335,8 @@ function App() {
         <Configuraciones
           costoVenta={costoVenta}
           handleCostoVenta={handleCostoVenta}
+          desgasteUtilidad={desgasteUtilidad}
+          handleDesgasteUtilidad={handleDesgasteUtilidad}
         />
         <button onClick={clearLocalStorage}>Limpiar localstorage</button>
         <AddMovimiento pushMovimiento={pushMovimiento} />
@@ -319,7 +345,11 @@ function App() {
           deleteMovimiento={deleteMovimiento}
         />
       </div>
-      <Tablon movimientos={movimientos} costoVenta={costoVenta} />
+      <Tablon
+        movimientos={movimientos}
+        costoVenta={costoVenta}
+        desgasteUtilidad={desgasteUtilidad}
+      />
     </main>
   );
 }
