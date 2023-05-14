@@ -1,0 +1,2 @@
+- Calcular automáticamente el costo por venta
+- Agregar los pasivos a largo plazo

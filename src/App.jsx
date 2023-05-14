@@ -9,6 +9,7 @@ import {
   activosFilters,
   cuentasPorCobrarFilter,
   inventarioFilter,
+  pasivosFilter,
   patrimonioFilters,
   utilidadesPerdidasFilter,
 } from "./data/filters";
@@ -17,6 +18,7 @@ import {
   activosFijosMap,
   cuentasPorCobrarMap,
   inventarioMap,
+  pasivosMap,
   patrimonioMap,
   utilidadesMap,
 } from "./data/maps";
@@ -174,7 +176,7 @@ function Movimientos({ movimientos = [], deleteMovimiento }) {
             <tr key={movimiento.id}>
               <td>{movimiento.fecha}</td>
               <td>{movimiento.movType}</td>
-              <td>{movimiento.valor.toLocaleString("es-CL")}</td>
+              <td>{toCLP(movimiento.valor)}</td>
               <td>{movimiento.desc}</td>
               <td>
                 <button onClick={() => deleteMovimiento(movimiento.id)}>
@@ -196,6 +198,7 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
   const patrimonio = movimientos.filter(patrimonioFilters);
   const utilidades = movimientos.filter(utilidadesPerdidasFilter);
   const cuentasPorCobrar = movimientos.filter(cuentasPorCobrarFilter);
+  const pasivos = movimientos.filter(pasivosFilter);
 
   let totalActivosCirculantes = 0,
     totalPasivos = 0,
@@ -203,7 +206,6 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
     totalInventario = 0,
     totalCuentasPorCobrar = 0,
     totalPatrimonio = 0,
-    totalFiados = 0,
     totalUtilidades = 0;
 
   const activosCirculantesMapeado = activosCirculantes.map((m) => {
@@ -254,6 +256,14 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
     return component;
   });
 
+  const pasivosMapeado = pasivos.map((m) => {
+    const { valor, component } = pasivosMap(m);
+
+    totalPasivos += valor;
+
+    return component;
+  });
+
   return (
     <div className="tabla-grid bs pd br-s">
       {/* ACTIVOS */}
@@ -267,7 +277,7 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
           {activosFijosMapeado}
         </section>
         <section className="balance-section">
-          <h4>Cuentas por cobrar ({toCLP(totalFiados)})</h4>
+          <h4>Cuentas por cobrar ({toCLP(totalCuentasPorCobrar)})</h4>
           {cuentasPorCobrarMapeado}
         </section>
         <section className="balance-section">
@@ -279,7 +289,6 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
           {toCLP(
             totalActivosFijos +
               totalActivosCirculantes +
-              totalFiados +
               totalInventario +
               totalCuentasPorCobrar
           )}
@@ -289,6 +298,7 @@ function Tablon({ movimientos = [], costoVenta, desgasteUtilidad }) {
       <div className="right-grid">
         <section className="balance-section">
           <h4>Pasivos ({toCLP(totalPasivos)})</h4>
+          {pasivosMapeado}
         </section>
         <section className="balance-section">
           <h4>Patrimonio ({toCLP(totalPatrimonio)})</h4>

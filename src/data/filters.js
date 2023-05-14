@@ -20,6 +20,12 @@ export function activosFijosFilter(m) {
   return mT == 0 || mT == 8;
 }
 
+export function pasivosFilter(m) {
+  const { movType: mT } = m;
+
+  return mT == 9;
+}
+
 export function inventarioFilter(m) {
   const { movType: mT } = m;
 

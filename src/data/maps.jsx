@@ -67,6 +67,23 @@ export function activosFijosMap(m) {
   };
 }
 
+export function pasivosMap(m) {
+  const { valor, desc } = m;
+
+  return {
+    valor,
+    component: (
+      <TablaBalanceRow
+        fecha={m.fecha}
+        signo={"+"}
+        valor={valor}
+        desc={desc}
+        key={m.id}
+      />
+    ),
+  };
+}
+
 export function inventarioMap(m, costoVenta) {
   const { valor, movType: mT, desc } = m;
 

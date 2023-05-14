@@ -35,9 +35,10 @@ const tiposMovimientos = [
     id: 8,
     title: "Venta de activo fijo (muebles, sillas, cocinas, etc)",
   },
+  {
+    id: 9,
+    title: "Préstamos a largo plazo (bancarios, cheques, etc)",
+  },
 ];
-
-/* Compra parcial (compra que no se agrega a los activos fijos) */
-/* Venta de activo fijo */
 
 export default tiposMovimientos;
