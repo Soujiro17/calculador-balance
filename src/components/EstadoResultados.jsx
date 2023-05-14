@@ -96,6 +96,9 @@ function EstadoResultados({ movimientos, desgasteUnidad }) {
           {toCLP(totalIngresos - totalCostos - totalGastos)}
         </h4>
         <h4>
+          <span>Caja:</span> {toCLP(totalCaja + totalCuentasPorCobrar)}
+        </h4>
+        <h4>
           <span>Total:</span>{" "}
           {toCLP(
             totalCaja +
