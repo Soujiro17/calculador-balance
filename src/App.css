@@ -24,7 +24,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: -moz-fit-content;
   width: fit-content;
+}
+
+.right-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .form-group label {
@@ -44,6 +53,37 @@
   border: 1px solid #000;
   gap: 2%;
   height: 100%;
+}
+
+.estado-resultados {
+  border: 1px solid #000 !important;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.estado-resultados-wrapper {
+  padding: 15px;
+  background-color: rgba(185, 185, 185, 0.333);
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.resumen {
+  text-align: initial;
+  flex-direction: column;
+}
+
+.resumen h4 span {
+  width: 100px;
+  display: inline-block;
+}
+
+.resumen h4 {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .left-grid,
@@ -83,6 +123,11 @@
 .total-neg {
   color: #fff;
   padding: 5px;
+}
+
+.total-pos h4,
+.total-neg h4 {
+  background-color: unset;
 }
 
 .total-neg {

@@ -80,3 +80,12 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
+h4 {
+  background-color: #ff0;
+}
+
+hr {
+  background-color: #fff;
+  width: 100%;
+}

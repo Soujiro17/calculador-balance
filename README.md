@@ -1,2 +1,2 @@
 - Calcular automáticamente el costo por venta
-- Agregar los pasivos a largo plazo
+- Se agregará la pérdida de desgaste a los gastos cuando vendes algo usado?
