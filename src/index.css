@@ -64,6 +64,11 @@ select {
   padding-left: 8px;
 }
 
+input:disabled,
+select:disabled {
+  background-color: #2221;
+}
+
 button {
   height: 35px;
   border-radius: 5px;

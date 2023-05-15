@@ -29,6 +29,34 @@ function App() {
   const handleDesgasteUtilidad = (e) => setDesgasteUtilidad(e.target.value);
   const handleCostoVenta = (e) => setCostoVenta(e.target.value);
 
+  const calcularCostoVenta = () => {
+    const compras = movimientos
+      .filter((m) => m.movType == 6)
+      .reduce((a, b) => {
+        return a + b.valor;
+      }, 0);
+
+    const perdidaBien = movimientos
+      .filter((m) => m.movType == 5)
+      .reduce((a, b) => {
+        return a + b.valor;
+      }, 0);
+
+    const ventas = movimientos
+      .filter((m) => m.movType == 2)
+      .reduce((a, b) => {
+        return a + b.valor;
+      }, 0);
+
+    console.log(compras, ventas);
+
+    console.log(movimientos.filter((m) => m.movType == 6));
+
+    const valor = Math.floor(((compras - perdidaBien) / ventas) * 100);
+
+    setCostoVenta(valor);
+  };
+
   return (
     <main className="container">
       <div className="left-container">
@@ -37,6 +65,7 @@ function App() {
           handleCostoVenta={handleCostoVenta}
           desgasteUtilidad={desgasteUtilidad}
           handleDesgasteUtilidad={handleDesgasteUtilidad}
+          calcularCostoVenta={calcularCostoVenta}
         />
         <button onClick={clearLocalStorage}>Limpiar localstorage</button>
         <AddMovimiento pushMovimiento={pushMovimiento} />

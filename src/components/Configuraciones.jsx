@@ -6,6 +6,7 @@ function Configuraciones({
   handleCostoVenta,
   handleDesgasteUtilidad,
   desgasteUtilidad,
+  calcularCostoVenta,
 }) {
   return (
     <div className="configuraciones bs br-s">
@@ -40,6 +41,12 @@ function Configuraciones({
         value={desgasteUtilidad}
         sufix="%"
       />
+      <h6>
+        El cálculo automático se realiza sumando todas las compras de activo
+        fijo (tipo 0) menos las pérdidas de bien (tipo 5) dividido entre las
+        ventas de inventario (tipo 2)
+      </h6>
+      <button onClick={calcularCostoVenta}>Calcular automáticamente</button>
     </div>
   );
 }
