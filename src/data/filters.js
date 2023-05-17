@@ -23,7 +23,7 @@ export function activosFijosFilter(m) {
 export function pasivosFilter(m) {
   const { movType: mT } = m;
 
-  return mT == 9;
+  return mT == 9 || mT == 10;
 }
 
 export function inventarioFilter(m) {

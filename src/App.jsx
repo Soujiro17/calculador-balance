@@ -48,10 +48,6 @@ function App() {
         return a + b.valor;
       }, 0);
 
-    console.log(compras, ventas);
-
-    console.log(movimientos.filter((m) => m.movType == 6));
-
     const valor = Math.floor(((compras - perdidaBien) / ventas) * 100);
 
     setCostoVenta(valor);

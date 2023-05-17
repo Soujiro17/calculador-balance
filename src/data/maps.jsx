@@ -6,7 +6,7 @@ export function activosCirculantesMap(m, dU) {
   let valorRow = valor,
     signo = "+";
 
-  if (mT == 0 || mT == 1 || mT == 6 || mT == 4 || mT == 7) {
+  if (mT == 0 || mT == 1 || mT == 6 || mT == 4 || mT == 7 || mT == 10) {
     signo = "-";
   } else if (mT == 8) {
     valorRow = valor * ((100 - dU) / 100);
@@ -68,14 +68,21 @@ export function activosFijosMap(m) {
 }
 
 export function pasivosMap(m) {
-  const { valor, desc } = m;
+  const { valor, desc, movType: mT } = m;
+
+  let valorRow = valor,
+    signo = "+";
+
+  if (mT == 10) {
+    signo = "-";
+  }
 
   return {
-    valor,
+    valor: signo === "+" ? valorRow : -valorRow,
     component: (
       <TablaBalanceRow
         fecha={m.fecha}
-        signo={"+"}
+        signo={signo}
         valor={valor}
         desc={desc}
         key={m.id}

@@ -39,6 +39,10 @@ const tiposMovimientos = [
     id: 9,
     title: "Préstamos a largo plazo (bancarios, cheques, etc)",
   },
+  {
+    id: 10,
+    title: "Pagar préstamo a largo plazo",
+  },
 ];
 
 export default tiposMovimientos;

@@ -30,7 +30,7 @@ function EstadoResultados({ movimientos, desgasteUnidad }) {
 
     let valor = b.valor;
 
-    if (mT == 0 || mT == 1 || mT == 6 || mT == 4 || mT == 7) {
+    if (mT == 0 || mT == 1 || mT == 6 || mT == 4 || mT == 7 || mT == 10) {
       valor = -valor;
     } else if (mT == 8) {
       valor = valor * ((100 - desgasteUnidad) / 100);
