@@ -6,6 +6,7 @@ import AddMovimiento from "./components/AddMovimiento";
 import Movimientos from "./components/Movimientos";
 import Tablon from "./components/Tablon";
 import EstadoResultados from "./components/EstadoResultados";
+import ExportToExcel from "./components/ExportToExcel";
 
 function App() {
   const [costoVenta, setCostoVenta] = useLocalStorage("costoVenta", 90);
@@ -19,6 +20,7 @@ function App() {
 
   const clearLocalStorage = () => {
     localStorage.removeItem("costoVenta");
+    localStorage.removeItem("desgasteUtilidad");
     localStorage.removeItem("movimientos");
   };
 
@@ -64,6 +66,11 @@ function App() {
           calcularCostoVenta={calcularCostoVenta}
         />
         <button onClick={clearLocalStorage}>Limpiar localstorage</button>
+        <ExportToExcel
+          movimientos={movimientos}
+          desgasteUtilidad={desgasteUtilidad}
+          costoVenta={costoVenta}
+        />
         <AddMovimiento pushMovimiento={pushMovimiento} />
         <Movimientos
           movimientos={movimientos}
@@ -78,7 +85,7 @@ function App() {
         />
         <EstadoResultados
           movimientos={movimientos}
-          desgasteUnidad={desgasteUtilidad}
+          desgasteUtilidad={desgasteUtilidad}
         />
       </div>
     </main>

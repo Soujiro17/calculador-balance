@@ -105,6 +105,13 @@ const useMovValues = ({ movimientos, desgasteUtilidad, costoVenta }) => {
     inventarioMapeado,
     cuentasPorCobrarMapeado,
     pasivosMapeado,
+    activosCirculantes,
+    activosFijos,
+    inventario,
+    patrimonio,
+    utilidades,
+    cuentasPorCobrar,
+    pasivos,
   };
 };
 
